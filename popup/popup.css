@@ -11,15 +11,9 @@
   --neon-blue: 184, 96%, 46%;
   --border: hsl(var(--neon-blue)), hsl(var(--neon-pink)), hsl(var(--neon-blue));
   --border-image: linear-gradient(-45deg, var(--border)) 10% stretch;
-  /* border: 0.4rem solid hsl(var(--neon-blue));
-  border-bottom: 0.4rem solid hsl(var(--neon-blue));
-  border-image: var(--border-image); */
-  overflow-y: hidden;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
+
 
 body {
   width: 330px;

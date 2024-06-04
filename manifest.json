@@ -1,25 +1,24 @@
 {
-    "manifest_version": 3,
-    "name": "ZUT Plan extension",
-    "description": "Get student plan by specified index.",
-    "version": "1.0.1",
-    "permissions": [
-        "activeTab",
-        "storage"
-    ],
-    "action": {
-        "default_popup": "./popup/popup.html",
-        "default_icon": "./icons/border-48.png"
-    },
-    "content_scripts": [
-        {
-            "js": [
-                "./scripts/content-script.js"
-            ],
-            "matches": [
-                "https://plan.zut.edu.pl/*"
-            ],
-            "run_at": "document_idle"
-        }
-    ]
+  "manifest_version": 3,
+  "name": "ZUT Plan extension",
+  "description": "Get student plan by specified index.",
+  "version": "1.0.2",
+  "permissions": ["activeTab", "storage"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bartosz.gajda@proton.me",
+      "strict_min_version": "119.0"
+    }
+  },
+  "action": {
+    "default_popup": "./popup/popup.html",
+    "default_icon": "./icons/border-48.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["./scripts/content-script.js"],
+      "matches": ["https://plan.zut.edu.pl/*"],
+      "run_at": "document_idle"
+    }
+  ]
 }

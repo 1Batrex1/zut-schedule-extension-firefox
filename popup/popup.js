@@ -22,14 +22,6 @@ function markActivePlan(newIndex = null) {
 		liElements[newIndex].classList.add('active');
 	}
 
-	// if (oldIndex === null) {
-	// 	liElements[newIndex].classList.add('active');
-	// } else if (liElements.length > 1) {
-	// 	liElements[oldIndex].classList.remove('active');
-	// 	liElements[newIndex].classList.add('active');
-	// } else {
-	// 	liElements[0].classList.add('active');
-	// }
 }
 
 function drawSchedule() {
@@ -152,8 +144,8 @@ function adjustRootHeight() {
 function changeActivePlan(i) {
 	activeIndex = i;
 	markActivePlan(i);
-	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {
+	browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+		browser.tabs.sendMessage(tabs[0].id, {
 			planData: planSchedule,
 			activePlan: i,
 		});
@@ -162,7 +154,7 @@ function changeActivePlan(i) {
 
 function loadData() {
 	return new Promise((resolve, reject) => {
-		chrome.storage.local.get(
+		browser.storage.local.get(
 			['planData', 'activePlan'],
 			function ({ planData, activePlan }) {
 				planSchedule = planData || [{ id: 0, index: '', name: 'You' }];
@@ -175,7 +167,7 @@ function loadData() {
 
 function saveData() {
 	return new Promise((resolve, reject) => {
-		chrome.storage.local.set(
+		browser.storage.local.set(
 			{ planData: planSchedule, activePlan: activeIndex },
 			() => {
 				resolve();
@@ -186,10 +178,10 @@ function saveData() {
 
 function deleteData() {
 	planSchedule = [];
-	chrome.storage.local.remove('planData');
-	chrome.storage.local.remove('activePlan');
-	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-		chrome.tabs.reload(tabs[0].id);
+	browser.storage.local.remove('planData');
+	browser.storage.local.remove('activePlan');
+	browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+		browser.tabs.reload(tabs[0].id);
 	});
 	location.reload();
 }
